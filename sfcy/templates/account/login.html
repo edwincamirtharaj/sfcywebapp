@@ -1,0 +1,83 @@
+<!-- templates/account/login.html -->
+
+{% extends "account/base.html" %}
+
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Sign In</h5>
+           <!-- Messages showed by package -->
+          {% if messages %}
+          <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          </div>
+          {% endif %}
+           <!-- Form error -->
+          {% if form.errors %}
+            {% for field in form %}
+              {% for error in field.errors %}
+                <div class="alert alert-danger" role="alert">
+                  <strong>{{ error|escape }}</strong>
+                </div>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                <strong>{{ error|escape }}</strong>
+              </div>
+            {% endfor %}
+          {% endif %}
+          <form method="post" class="form-signin">
+            {% csrf_token %}
+            <div class="form-outline mb-4">
+              <input type="email" name="login" placeholder="Email address" autocomplete="email" maxlength="320" required id="id_login" class="form-control" />
+            </div>
+          
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" name="password" placeholder="Password" autocomplete="current-password" required  aria-describedby="id_password_helptext" id="id_password" class="form-control" /> 
+            </div>
+            
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+                <!-- Checkbox -->
+                <div class="form-check">
+                  
+                  <input class="form-check-input" type="checkbox" name="remember" id="id_remember" checked />
+                  <label class="form-check-label" for="id_remember">Remember Me:</label>
+                </div>
+              </div>
+          
+              <div class="col">
+                <!-- Simple link -->
+                <span class="helptext" id="id_password_helptext">
+                  <a href="/accounts/password/reset/">Forgot your password?</a>
+                </span>
+              </div>
+            </div>
+          
+            <!-- Submit button -->
+            
+            <button type="submit" style = "width:100%;" class="btn btn-primary btn-block mt-3">Sign In</button>
+            <!-- Register buttons -->
+            <p class="mt-3 text-center">
+              If you have not created an account yet, then please
+              <a href="/accounts/signup/">Sign Up First</a>.
+            </p>
+            
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
