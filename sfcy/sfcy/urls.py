@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 from django.urls import path, reverse_lazy
 from .views import profile
+from allauth.account.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,6 @@ urlpatterns = [
     path('accounts/', include('allauth.account.urls')),
     path('', RedirectView.as_view(url=reverse_lazy('account_login')), name='home_redirect'),
     path('accounts/profile/', profile, name='account_profile'),
+    path('company/', include('company.urls')),
+    path('accounts/logout/', LogoutView.as_view(), name='account_logout'),
 ]

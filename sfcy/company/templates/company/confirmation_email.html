@@ -1,0 +1,30 @@
+<!-- templates/company/confirmation_email.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Confirmation</title>
+</head>
+<body>
+
+    <h2>{{subject}}</h2>
+    <hr>
+    <p>Dear Client,</p>
+
+    <p>Your company, {{ company.name }}, has been created successfully!</p>
+
+    <p>{{ username }} is requesting you to complete the user mapping process. If you wish to approve this user, you can click the link below; otherwise, ignore it:</p>
+
+    <a href="{{ verification_link }}" target="_blank">Verify User Mapping</a>
+
+    <p>If you did not initiate this action or have any questions, please contact us immediately.</p>
+
+    <p>Thank you for choosing our platform!</p>
+
+    <p>Best regards,<br>
+    SF Consultancy</p>
+
+</body>
+</html>
