@@ -125,7 +125,7 @@ def company_dashboard(request, company_id):
     # Get the company based on the provided company_id
     company = get_object_or_404(Company, id=company_id)
 
-    user_mapping = UserCompanyMapping.objects.filter(user=request.user, company=company).first()
+    user_mapping = UserCompanyMapping.objects.filter(user=request.user, company=company, is_user_verified=True, is_approved=True).first()
     if user_mapping is None:
         # Redirect to another page or display an error message
         return redirect('access_denied')
@@ -193,5 +193,5 @@ class CompanyFilesView(View):
 
 
 def access_denied(request):
-    return render(request, 'access_denied.html')
+    return render(request, 'company/access_denied.html')
 

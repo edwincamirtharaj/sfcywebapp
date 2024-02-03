@@ -38,7 +38,7 @@ class UserCompanyMapping(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     is_user_verified = models.BooleanField(default=False)  # New field for user verification
-    is_approved = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=True)
     verification_token = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
