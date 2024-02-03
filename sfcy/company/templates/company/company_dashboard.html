@@ -1,0 +1,46 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+  <!-- Company Dashboard Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">{{company.name}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto ">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'company_files' company.id %}" target="_blank">Files</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content for Company Dashboard -->
+  <div class="container mt-3">
+    <div class="row">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+              <div class="col-md-9">
+                <div class="card shadow">
+                  <div class="card-body">
+                    <h5 class="card-title bg-secondary p-3 text-white text-center mb-4">Your dashboard will be shown soon ! </h5>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      <main class="col-md-12">
+        {% block main_content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+{% endblock %}

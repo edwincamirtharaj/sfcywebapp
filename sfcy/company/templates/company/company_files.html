@@ -1,0 +1,86 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+<!-- Company Dashboard Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">{{company.name}}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto ">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'company_dashboard' company.id %}">Dashboard</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title bg-danger p-3 text-white text-center mb-4">Upload File</h5>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+            <button class ="btn btn-primary mt-4 mb-3" style = "width:100%"type="submit">Upload</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8 mt-4 mt-lg-0">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title bg-danger p-3 text-white text-center mb-4">Uploaded Files</h5>
+          {% if files %}
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">File Name</th>
+                  <th scope="col">File</th>
+                  <!-- Add more table headers as needed -->
+                </tr>
+              </thead>
+              <tbody>
+                {% for file in files %}
+                  <tr>
+                    <td>{{ file.file_name }}</td>
+                    <td><a href="{{ file.file.url }}" target="_blank" class="btn btn-secondary btn-sm" download>Download</a></td>
+                    <!-- Add more table data as needed -->
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            {% if files.has_other_pages %}
+              <ul class="pagination justify-content-center">
+                {% if files.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page=1">&laquo;&laquo;</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{ files.previous_page_number }}">{{ files.previous_page_number }}</a></li>
+                {% endif %}
+                <li class="page-item disabled"><span class="page-link">{{ files.number }}</span></li>
+                {% if files.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ files.next_page_number }}">{{ files.next_page_number }}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{ files.paginator.num_pages }}">&raquo;&raquo;</a></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+          {% else %}
+            <p>No files have been uploaded yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

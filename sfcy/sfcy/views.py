@@ -9,6 +9,6 @@ def profile(request):
     user_mappings = UserCompanyMapping.objects.filter(user=request.user)
 
     # Extract the associated companies' names
-    company_names = [user_mapping.company.name for user_mapping in user_mappings]
-    context = {'user': request.user, 'company_names': company_names}
+    companies = [user_mapping.company for user_mapping in user_mappings]
+    context = {'user': request.user, 'companies': companies}
     return render(request, 'account/profile.html', context)

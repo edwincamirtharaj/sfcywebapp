@@ -1,7 +1,7 @@
 {% extends 'account/base.html' %}
 
 {% block content %}
-{% if company_names %}
+{% if companies %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">SF</a>
@@ -39,11 +39,11 @@
         <div class="card-body">
           <h5 class="card-title bg-warning p-3 text-white text-center mb-4">User Mapped Company List</h5>
           <input id="companySearchInput" class="form-control mb-4 me-2" type="search" placeholder="Search Company" aria-label="Search">
-          {% for company_name in company_names %}
-              <a href="" target="_blank" style="text-decoration: none;" class=" text-secondary">
-                <div class="card mb-3" data-company="{{ company_name }}">
+          {% for company in companies %}
+              <a href="{% url 'company_dashboard' company.id %}" target="_blank" style="text-decoration: none;" class=" text-secondary">
+                <div class="card mb-3" data-company="{{ company.name }}">
                   <div class="card-body">
-                    {{ company_name }}
+                    {{ company.name }}
                   </div>
                 </div>
               </a>

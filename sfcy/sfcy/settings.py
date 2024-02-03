@@ -194,3 +194,6 @@ EMAIL_SUBJECT_PREFIX = '[MyApp]'
 # Set to True to use the console backend during development
 EMAIL_BACKEND_CONSOLE = True
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
