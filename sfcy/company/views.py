@@ -125,10 +125,15 @@ def company_dashboard(request, company_id):
     # Get the company based on the provided company_id
     company = get_object_or_404(Company, id=company_id)
 
-    user_mapping = UserCompanyMapping.objects.filter(user=request.user, company=company, is_user_verified=True, is_approved=True).first()
-    if user_mapping is None:
-        # Redirect to another page or display an error message
-        return redirect('access_denied')
+    # Check if the user is a staff member
+    if request.user.is_staff:
+        # If user is staff, allow access without checking user_mapping
+        pass
+    else:
+        user_mapping = UserCompanyMapping.objects.filter(user=request.user, company=company, is_user_verified=True, is_approved=True).first()
+        if user_mapping is None:
+            # Redirect to another page or display an error message
+            return redirect('access_denied')
 
     # Pass relevant data to the template
     context = {

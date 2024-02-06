@@ -19,6 +19,8 @@ from django.views.generic import RedirectView
 from django.urls import path, reverse_lazy
 from .views import profile
 from allauth.account.views import LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +30,5 @@ urlpatterns = [
     path('accounts/profile/', profile, name='account_profile'),
     path('company/', include('company.urls')),
     path('accounts/logout/', LogoutView.as_view(), name='account_logout'),
+    path('twilio/', include('twilio_integration.urls')),
 ]

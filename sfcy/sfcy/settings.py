@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'allauth',
     'allauth.account',
-    'company'
+    'company',
+    'twilio_integration'
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'company', 'templates'),
+                 os.path.join(BASE_DIR, 'twilio_integration', 'templates'),
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -196,4 +198,10 @@ EMAIL_BACKEND_CONSOLE = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Twilio Settings
+TWILIO_ACCOUNT_SID = 'ACc0cb016b1cdbf70a5d5d013caf421cd5'
+TWILIO_AUTH_TOKEN = '397dd9db50a84adaa46c850c2cbe930c'
+TWILIO_PHONE_NUMBER = '+14155238886'
+
 

@@ -1,5 +1,15 @@
 from django.contrib import admin
 from .models import WhatsAppNumber, Company, UserCompanyMapping, Year, Month, Department, ReportName, FileUpload
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+
+# Unregister the existing UserAdmin
+admin.site.unregister(User)
+
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    list_display = ('username', 'email', 'is_staff', 'is_superuser', 'is_active')  # Customize the fields displayed in the list view
+    list_editable = ('is_active', 'is_staff', 'is_superuser')  # Enable editing for the 'is_active' field directly in the list view
 
 @admin.register(WhatsAppNumber)
 class WhatsAppNumberAdmin(admin.ModelAdmin):
@@ -12,6 +22,7 @@ class CompanyAdmin(admin.ModelAdmin):
 @admin.register(UserCompanyMapping)
 class UserCompanyMappingAdmin(admin.ModelAdmin):
     list_display = ('user', 'company', 'is_user_verified', 'is_approved', 'verification_token')
+    list_editable = ('is_user_verified','is_approved')
 
 @admin.register(Year)
 class YearAdmin(admin.ModelAdmin):
